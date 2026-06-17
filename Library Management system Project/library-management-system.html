@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LibraryHub - Professional Library Management System</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --primary-dark: #1e3a8a;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            box-shadow: 0 4px 20px rgba(30, 64, 175, 0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white !important;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-brand i {
+            margin-right: 0.5rem;
+            color: var(--accent-light);
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-light) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--primary-light) 100%);
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        /* Buttons */
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(245, 158, 11, 0.4);
+            color: white;
+        }
+
+        .btn-secondary-custom {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 12px 32px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary-custom:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 2px;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(30, 64, 175, 0.15);
+            border-color: var(--primary-light);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            color: var(--accent);
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* Book Grid */
+        .book-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .book-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(30, 64, 175, 0.2);
+        }
+
+        .book-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+        }
+
+        .book-card:hover .book-image::after {
+            left: 100%;
+        }
+
+        .book-info {
+            padding: 1.5rem;
+        }
+
+        .book-title {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .book-author {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-status {
+            font-size: 0.85rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .book-status.available {
+            background: #dbeafe;
+            color: var(--primary);
+        }
+
+        .book-status.unavailable {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* Tabs */
+        .nav-tabs {
+            border-bottom: 2px solid var(--border);
+        }
+
+        .nav-tabs .nav-link {
+            color: #64748b;
+            border: none;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--primary);
+            background: transparent;
+            border: none;
+        }
+
+        .nav-tabs .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        /* Form Styles */
+        .form-control, .form-select {
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.15);
+        }
+
+        /* Dashboard Cards */
+        .dashboard-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* Table Styles */
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table thead {
+            background: #f8fafc;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .table th {
+            color: var(--dark);
+            font-weight: 700;
+            border: none;
+            padding: 1.25rem;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .table td {
+            padding: 1.25rem;
+            border-color: var(--border);
+            vertical-align: middle;
+        }
+
+        .table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 5rem;
+        }
+
+        .footer-link {
+            color: #cbd5e1;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-light);
+        }
+
+        /* Page Transitions */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="#"><i class="fas fa-book"></i>LibraryHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('home')">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('catalog')">Catalog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('user')">User Portal</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('admin')">Admin Panel</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page-section active">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container hero-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1>Welcome to LibraryHub</h1>
+                        <p>Your complete digital library management solution. Discover, manage, and explore thousands of books seamlessly.</p>
+                        <div class="d-flex gap-3 flex-wrap">
+                            <button class="btn btn-primary-custom" onclick="showPage('catalog')">
+                                <i class="fas fa-search"></i> Explore Catalog
+                            </button>
+                            <button class="btn btn-secondary-custom" onclick="showPage('user')">
+                                <i class="fas fa-user"></i> Sign In
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <div style="font-size: 5rem; color: rgba(255,255,255,0.2);">
+                            <i class="fas fa-books"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section" style="background: #f8fafc;">
+            <div class="container">
+                <h2 class="section-title">Why Choose LibraryHub?</h2>
+                <div class="row g-4 mt-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h5>Advanced Search</h5>
+                            <p class="text-muted">Find books instantly with powerful filtering and search capabilities.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h5>Real-time Availability</h5>
+                            <p class="text-muted">Check book availability in real-time across all library branches.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <h5>Smart Notifications</h5>
+                            <p class="text-muted">Get alerts for due dates, new arrivals, and reservation updates.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h5>User Management</h5>
+                            <p class="text-muted">Seamless member profiles and borrowing history tracking.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h5>Analytics Dashboard</h5>
+                            <p class="text-muted">Comprehensive insights into library usage and trends.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <h5>Secure & Reliable</h5>
+                            <p class="text-muted">Enterprise-grade security for all your library data.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="section">
+            <div class="container">
+                <div class="row text-center g-4">
+                    <div class="col-md-3">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Books in Catalog</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-number">15K+</div>
+                        <div class="stat-label">Active Members</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label">Branches</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- BOOK CATALOG PAGE -->
+    <div id="catalog" class="page-section">
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Book Catalog</h2>
+                
+                <!-- Search & Filter -->
+                <div class="row g-3 mb-5">
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search by title, author, or ISBN...">
+                    </div>
+                    <div class="col-lg-3">
+                        <select class="form-select">
+                            <option>All Categories</option>
+                            <option>Fiction</option>
+                            <option>Non-Fiction</option>
+                            <option>Science</option>
+                            <option>History</option>
+                            <option>Technology</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <select class="form-select">
+                            <option>Sort By</option>
+                            <option>Most Popular</option>
+                            <option>Latest</option>
+                            <option>A-Z</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Book Grid -->
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="book-card">
+                            <div class="book-image">📚</div>
+                            <div class="book-info">
+                                <div class="book-title">The Great Gatsby</div>
+                                <div class="book-author">F. Scott Fitzgerald</div>
+                                <span class="book-status available">Available</span>
+                                <button class="btn btn-sm btn-primary-custom w-100" style="padding: 0.5rem;">Borrow</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="book-card">
+                            <div class="book-image">📖</div>
+                            <div class="book-info">
+                                <div class="book-title">To Kill a Mockingbird</div>
+                                <div class="book-author">Harper Lee</div>
+                                <span class="book-status unavailable">Unavailable</span>
+                                <button class="btn btn-sm btn-outline-primary w-100" style="padding: 0.5rem;">Reserve</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="book-card">
+                            <div class="book-image">📕</div>
+                            <div class="book-info">
+                                <div class="book-title">1984</div>
+                                <div class="book-author">George Orwell</div>
+                                <span class="book-status available">Available</span>
+                                <button class="btn btn-sm btn-primary-custom w-100" style="padding: 0.5rem;">Borrow</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="book-card">
+                            <div class="book-image">📗</div>
+                            <div class="book-info">
+                                <div class="book-title">Pride and Prejudice</div>
+                                <div class="book-author">Jane Austen</div>
+                                <span class="book-status available">Available</span>
+                                <button class="btn btn-sm btn-primary-custom w-100" style="padding: 0.5rem;">Borrow</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="book-card">
+                            <div class="book-image">📔</div>
+                            <div class="book-info">
+                                <div class="book-title">The Catcher in the Rye</div>
+                                <div class="book-author">J.D. Salinger</div>
+                                <span class="book-status unavailable">Unavailable</span>
+                                <button class="btn btn-sm btn-outline-primary w-100" style="padding: 0.5rem;">Reserve</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="book-card">
+                            <div class="book-image">📘</div>
+                            <div class="book-info">
+                                <div class="book-title">Atomic Habits</div>
+                                <div class="book-author">James Clear</div>
+                                <span class="book-status available">Available</span>
+                                <button class="btn btn-sm btn-primary-custom w-100" style="padding: 0.5rem;">Borrow</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="book-card">
+                            <div class="book-image">📙</div>
+                            <div class="book-info">
+                                <div class="book-title">Sapiens</div>
+                                <div class="book-author">Yuval Noah Harari</div>
+                                <span class="book-status available">Available</span>
+                                <button class="btn btn-sm btn-primary-custom w-100" style="padding: 0.5rem;">Borrow</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="book-card">
+                            <div class="book-image">📚</div>
+                            <div class="book-info">
+                                <div class="book-title">Deep Work</div>
+                                <div class="book-author">Cal Newport</div>
+                                <span class="book-status unavailable">Unavailable</span>
+                                <button class="btn btn-sm btn-outline-primary w-100" style="padding: 0.5rem;">Reserve</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- USER PORTAL PAGE -->
+    <div id="user" class="page-section">
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">User Portal</h2>
+
+                <!-- Tabs -->
+                <ul class="nav nav-tabs mb-5" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#mybooks">My Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#profile">Profile</a>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Dashboard Tab -->
+                    <div id="dashboard" class="tab-pane fade show active">
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-3">
+                                <div class="dashboard-card">
+                                    <div class="stat-number">3</div>
+                                    <div class="stat-label">Books Borrowed</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="dashboard-card">
+                                    <div class="stat-number">2</div>
+                                    <div class="stat-label">Books Reserved</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="dashboard-card">
+                                    <div class="stat-number">5</div>
+                                    <div class="stat-label">Days Remaining</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="dashboard-card">
+                                    <div class="stat-number">0</div>
+                                    <div class="stat-label">Overdue Books</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="mb-3">Upcoming Due Dates</h5>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Book Title</th>
+                                        <th>Due Date</th>
+                                        <th>Days Left</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>The Great Gatsby</strong></td>
+                                        <td>May 15, 2026</td>
+                                        <td><span class="badge bg-success">10 days</span></td>
+                                        <td><button class="btn btn-sm btn-outline-primary">Renew</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Atomic Habits</strong></td>
+                                        <td>May 20, 2026</td>
+                                        <td><span class="badge bg-info">15 days</span></td>
+                                        <td><button class="btn btn-sm btn-outline-primary">Renew</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Sapiens</strong></td>
+                                        <td>May 25, 2026</td>
+                                        <td><span class="badge bg-warning text-dark">20 days</span></td>
+                                        <td><button class="btn btn-sm btn-outline-primary">Renew</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- My Books Tab -->
+                    <div id="mybooks" class="tab-pane fade">
+                        <div class="row g-4">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="book-card">
+                                    <div class="book-image">📚</div>
+                                    <div class="book-info">
+                                        <div class="book-title">The Great Gatsby</div>
+                                        <div class="book-author">F. Scott Fitzgerald</div>
+                                        <small class="text-muted d-block mb-2">Due: May 15, 2026</small>
+                                        <button class="btn btn-sm btn-danger w-100">Return Book</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="book-card">
+                                    <div class="book-image">📗</div>
+                                    <div class="book-info">
+                                        <div class="book-title">Atomic Habits</div>
+                                        <div class="book-author">James Clear</div>
+                                        <small class="text-muted d-block mb-2">Due: May 20, 2026</small>
+                                        <button class="btn btn-sm btn-danger w-100">Return Book</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="book-card">
+                                    <div class="book-image">📙</div>
+                                    <div class="book-info">
+                                        <div class="book-title">Sapiens</div>
+                                        <div class="book-author">Yuval Noah Harari</div>
+                                        <small class="text-muted d-block mb-2">Due: May 25, 2026</small>
+                                        <button class="btn btn-sm btn-danger w-100">Return Book</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Tab -->
+                    <div id="profile" class="tab-pane fade">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h5 class="mb-4">Personal Information</h5>
+                                <form>
+                                    <div class="mb-3">
+                                        <label class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" value="John Doe" disabled>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" value="john@example.com" disabled>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Membership ID</label>
+                                        <input type="text" class="form-control" value="LIB-2024-001" disabled>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Member Since</label>
+                                        <input type="text" class="form-control" value="January 15, 2024" disabled>
+                                    </div>
+                                    <button type="button" class="btn btn-primary-custom">Edit Profile</button>
+                                </form>
+                            </div>
+                            <div class="col-lg-6">
+                                <h5 class="mb-4">Account Settings</h5>
+                                <div class="dashboard-card mb-3">
+                                    <h6>Notification Preferences</h6>
+                                    <div class="form-check mt-3">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                        <label class="form-check-label">Due date reminders</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                        <label class="form-check-label">New arrivals in my interests</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox">
+                                        <label class="form-check-label">Weekly digest</label>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary-custom mt-3">Save Preferences</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ADMIN PANEL PAGE -->
+    <div id="admin" class="page-section">
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Admin Dashboard</h2>
+
+                <!-- Stats Row -->
+                <div class="row g-4 mb-5">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="dashboard-card">
+                            <div style="color: var(--primary); font-size: 1.5rem; margin-bottom: 0.5rem;">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="stat-number">50,234</div>
+                            <div class="stat-label">Total Books</div>
+                            <small class="text-muted">↑ 234 this month</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="dashboard-card">
+                            <div style="color: var(--accent); font-size: 1.5rem; margin-bottom: 0.5rem;">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-number">15,482</div>
+                            <div class="stat-label">Active Members</div>
+                            <small class="text-muted">↑ 482 this month</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="dashboard-card">
+                            <div style="color: #10b981; font-size: 1.5rem; margin-bottom: 0.5rem;">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-number">12,543</div>
+                            <div class="stat-label">Active Checkouts</div>
+                            <small class="text-muted">↓ 145 this week</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="dashboard-card">
+                            <div style="color: #ef4444; font-size: 1.5rem; margin-bottom: 0.5rem;">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="stat-number">342</div>
+                            <div class="stat-label">Overdue Books</div>
+                            <small class="text-muted">↑ 28 today</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <ul class="nav nav-tabs mb-4" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#books-mgmt">Books Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#members-mgmt">Members</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#transactions">Transactions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#reports">Reports</a>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Books Management -->
+                    <div id="books-mgmt" class="tab-pane fade show active">
+                        <div class="mb-4">
+                            <button class="btn btn-primary-custom">
+                                <i class="fas fa-plus"></i> Add New Book
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ISBN</th>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Category</th>
+                                        <th>Quantity</th>
+                                        <th>Available</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>978-0743273565</td>
+                                        <td><strong>The Great Gatsby</strong></td>
+                                        <td>F. Scott Fitzgerald</td>
+                                        <td><span class="badge bg-info">Fiction</span></td>
+                                        <td>25</td>
+                                        <td><span class="badge bg-success">18</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>978-0061120084</td>
+                                        <td><strong>To Kill a Mockingbird</strong></td>
+                                        <td>Harper Lee</td>
+                                        <td><span class="badge bg-info">Fiction</span></td>
+                                        <td>20</td>
+                                        <td><span class="badge bg-warning text-dark">5</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>978-0451524935</td>
+                                        <td><strong>1984</strong></td>
+                                        <td>George Orwell</td>
+                                        <td><span class="badge bg-info">Fiction</span></td>
+                                        <td>30</td>
+                                        <td><span class="badge bg-success">22</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>978-1234567890</td>
+                                        <td><strong>Atomic Habits</strong></td>
+                                        <td>James Clear</td>
+                                        <td><span class="badge bg-warning">Non-Fiction</span></td>
+                                        <td>35</td>
+                                        <td><span class="badge bg-success">28</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Members Management -->
+                    <div id="members-mgmt" class="tab-pane fade">
+                        <div class="mb-4">
+                            <button class="btn btn-primary-custom">
+                                <i class="fas fa-user-plus"></i> Add New Member
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Member ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Join Date</th>
+                                        <th>Books Borrowed</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>LIB-2024-001</td>
+                                        <td><strong>John Doe</strong></td>
+                                        <td>john@example.com</td>
+                                        <td>Jan 15, 2024</td>
+                                        <td>3</td>
+                                        <td><span class="badge bg-success">Active</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>LIB-2024-002</td>
+                                        <td><strong>Jane Smith</strong></td>
+                                        <td>jane@example.com</td>
+                                        <td>Feb 20, 2024</td>
+                                        <td>5</td>
+                                        <td><span class="badge bg-success">Active</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>LIB-2024-003</td>
+                                        <td><strong>Mike Johnson</strong></td>
+                                        <td>mike@example.com</td>
+                                        <td>Mar 10, 2024</td>
+                                        <td>2</td>
+                                        <td><span class="badge bg-warning text-dark">Suspended</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Transactions -->
+                    <div id="transactions" class="tab-pane fade">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Transaction ID</th>
+                                        <th>Member</th>
+                                        <th>Book</th>
+                                        <th>Type</th>
+                                        <th>Date</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>TXN-001</td>
+                                        <td>John Doe</td>
+                                        <td>The Great Gatsby</td>
+                                        <td><span class="badge bg-info">Checkout</span></td>
+                                        <td>May 5, 2026</td>
+                                        <td>May 15, 2026</td>
+                                        <td><span class="badge bg-success">Active</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>TXN-002</td>
+                                        <td>Jane Smith</td>
+                                        <td>1984</td>
+                                        <td><span class="badge bg-success">Return</span></td>
+                                        <td>May 4, 2026</td>
+                                        <td>May 14, 2026</td>
+                                        <td><span class="badge bg-secondary">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>TXN-003</td>
+                                        <td>Mike Johnson</td>
+                                        <td>Atomic Habits</td>
+                                        <td><span class="badge bg-danger">Overdue</span></td>
+                                        <td>Apr 25, 2026</td>
+                                        <td>May 5, 2026</td>
+                                        <td><span class="badge bg-danger">Overdue</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Reports -->
+                    <div id="reports" class="tab-pane fade">
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <div class="dashboard-card">
+                                    <h6 class="mb-3">Popular Books This Month</h6>
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex justify-content-between">
+                                                <strong>The Great Gatsby</strong>
+                                                <span class="badge bg-primary">245</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex justify-content-between">
+                                                <strong>Atomic Habits</strong>
+                                                <span class="badge bg-primary">198</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex justify-content-between">
+                                                <strong>Sapiens</strong>
+                                                <span class="badge bg-primary">167</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="dashboard-card">
+                                    <h6 class="mb-3">Top Members</h6>
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex justify-content-between">
+                                                <strong>Jane Smith</strong>
+                                                <span class="badge bg-success">12 books</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex justify-content-between">
+                                                <strong>John Doe</strong>
+                                                <span class="badge bg-success">8 books</span>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex justify-content-between">
+                                                <strong>Sarah Wilson</strong>
+                                                <span class="badge bg-success">7 books</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-md-6 col-lg-3">
+                    <h6 class="mb-3"><i class="fas fa-book"></i> LibraryHub</h6>
+                    <p class="text-muted">Your complete digital library management solution.</p>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h6 class="mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="footer-link">Home</a></li>
+                        <li><a href="#" class="footer-link">Catalog</a></li>
+                        <li><a href="#" class="footer-link">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h6 class="mb-3">Support</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="footer-link">Help Center</a></li>
+                        <li><a href="#" class="footer-link">Contact Us</a></li>
+                        <li><a href="#" class="footer-link">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h6 class="mb-3">Follow Us</h6>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="footer-link" style="font-size: 1.3rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="footer-link" style="font-size: 1.3rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="footer-link" style="font-size: 1.3rem;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary">
+            <div class="text-center text-muted py-3">
+                <p>&copy; 2024 LibraryHub. All rights reserved. | <a href="#" class="footer-link">Privacy Policy</a> | <a href="#" class="footer-link">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Search functionality
+        document.getElementById('searchInput')?.addEventListener('keyup', function(e) {
+            console.log('Searching for:', e.target.value);
+        });
+    </script>
+</body>
+</html>

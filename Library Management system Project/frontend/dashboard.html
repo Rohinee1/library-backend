@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LibraryHub Dashboard</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<style>
+body {
+    background: #f1f5f9;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+    height: 100vh;
+    background: #1e293b;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    width: 230px;
+}
+
+.sidebar h4 {
+    color: #fbbf24;
+}
+
+.sidebar a {
+    display: block;
+    color: #cbd5e1;
+    padding: 10px;
+    margin: 5px 0;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.sidebar a:hover {
+    background: #334155;
+}
+
+/* Main */
+.main {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+/* Cards */
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Book cards */
+.book-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    transition: 0.3s;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+}
+
+.book-title {
+    font-weight: bold;
+}
+
+.book-status {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.available {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.unavailable {
+    background: #fee2e2;
+    color: #991b1b;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h4>📚 LibraryHub</h4>
+    <a href="#">Dashboard</a>
+    <a href="#">Books</a>
+    <a href="#">Users</a>
+    <a href="#" onclick="logout()">Logout</a>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+
+    <h2 class="mb-4">Dashboard</h2>
+
+    <!-- Stats -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="stat-card">
+                <h5>Total Books</h5>
+                <h2 id="totalBooks">0</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Book Button -->
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addModal">
+        Add Book
+    </button>
+
+    <!-- Books -->
+    <div class="row" id="bookContainer"></div>
+
+</div>
+
+<!-- ADD BOOK MODAL -->
+<div class="modal fade" id="addModal">
+  <div class="modal-dialog">
+    <div class="modal-content p-3">
+
+        <h5>Add Book</h5>
+
+        <input class="form-control mb-2" id="title" placeholder="Title">
+        <input class="form-control mb-2" id="author" placeholder="Author">
+        <input class="form-control mb-2" id="isbn" placeholder="ISBN">
+        <input class="form-control mb-2" id="category" placeholder="Category">
+        <input class="form-control mb-2" id="quantity" placeholder="Quantity">
+
+        <button class="btn btn-success" onclick="addBook()">Submit</button>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/books.js"></script>
+
+</body>
+</html>
